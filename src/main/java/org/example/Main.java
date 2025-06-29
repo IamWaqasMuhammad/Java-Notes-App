@@ -21,7 +21,7 @@ public class Main extends Application {
             }
         };
 
-        System.out.println("SPlashSCreen shown");
+
 
         sleeper.setOnSucceeded(e -> {
             Platform.runLater(() -> {
