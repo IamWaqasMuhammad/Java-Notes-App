@@ -40,4 +40,5 @@ A sleek and user-friendly JavaFX desktop application to **create**, **update**, 
 ## 🔗 Connect with Me
 
 I'd love to connect with you on LinkedIn! Feel free to reach out:  
-[![LinkedIn]((https://www.linkedin.com/in/waqas-muhammad-0ba609290/).svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/waqas-muhammad-0ba609290/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/waqas-muhammad-0ba609290/)
+
