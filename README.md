@@ -21,12 +21,18 @@ A sleek and user-friendly JavaFX desktop application to **create**, **update**, 
   <img alt="JavaFX" src="https://img.shields.io/badge/JavaFX-0078D7?style=for-the-badge&logo=javafx&logoColor=white" height="28"/>
   <img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" height="28"/>
   <img alt="iText" src="https://img.shields.io/badge/iText-FF6F00?style=for-the-badge&logo=adobe&logoColor=white" height="28"/>
+  <img alt="GitHub" src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" height="28"/>
+  <img alt="IntelliJ IDEA" src="https://img.shields.io/badge/IntelliJ%20IDEA-000000?style=for-the-badge&logo=intellij-idea&logoColor=white" height="28"/>
 </p>
 
-- ☕ **Java 17**  
-- 🎨 **JavaFX 19**  
+
+- ☕ **Java**  
+- 🎨 **JavaFX**  
 - 🍃 **MongoDB** for NoSQL storage  
 - 📄 **iText PDF** library for PDF generation  
+- 🔧 **GitHub** for version control  
+- 💡 **IntelliJ IDEA** as the IDE.  
+
 
 ---
 
