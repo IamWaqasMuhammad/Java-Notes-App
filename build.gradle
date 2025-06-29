@@ -1,0 +1,26 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "19"
+    modules = [ 'javafx.controls' ]
+}
+
+dependencies {
+    // MongoDB Java Driver (synchronous)
+    implementation 'org.mongodb:mongodb-driver-sync:4.9.1'
+    // SLF4J binding for simple console logging
+    implementation 'org.slf4j:slf4j-simple:2.0.13'
+    implementation 'org.apache.pdfbox:pdfbox:2.0.29'
+    implementation 'com.itextpdf:itextpdf:5.5.13.3'
+
+}
+
+
+mainClassName = 'org.example.Main'
