@@ -23,7 +23,7 @@ public class SplashScreen {
 
         Scene scene = new Scene(root, 400, 250);
         stage.setScene(scene);
-        stage.setTitle("Splash");
+        stage.setTitle("Splash Screen");
         stage.show();
     }
 }

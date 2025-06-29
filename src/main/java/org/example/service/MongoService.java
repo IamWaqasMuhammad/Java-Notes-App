@@ -2,59 +2,58 @@ package org.example.service;
 
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.*;
-import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.types.ObjectId;
 import org.example.model.Note;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.mongodb.client.model.Filters.eq;
-import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
-import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 public class MongoService {
-
-    private final MongoClient client;
-    private final MongoDatabase database;
     private final MongoCollection<Note> noteCollection;
 
     public MongoService() {
-        // Register PojoCodecProvider
-        CodecRegistry pojoCodecRegistry = fromRegistries(
+        MongoClient client = MongoClients.create("mongodb://localhost:27017");
+        MongoDatabase db = client.getDatabase("notes_db");
+        CodecRegistry pojoCodecRegistry = org.bson.codecs.configuration.CodecRegistries.fromRegistries(
                 MongoClientSettings.getDefaultCodecRegistry(),
-                fromProviders(org.bson.codecs.pojo.PojoCodecProvider.builder().automatic(true).build())
+                org.bson.codecs.configuration.CodecRegistries.fromProviders(
+                        org.bson.codecs.pojo.PojoCodecProvider.builder().automatic(true).build()
+                )
         );
+        this.noteCollection = db.getCollection("notes", Note.class).withCodecRegistry(pojoCodecRegistry);
+    }
 
-        // Create client with codec
-        MongoClientSettings settings = MongoClientSettings.builder()
-                .codecRegistry(pojoCodecRegistry)
-                .build();
-
-        client = MongoClients.create(settings);
-        database = client.getDatabase("notesdb").withCodecRegistry(pojoCodecRegistry);
-        noteCollection = database.getCollection("notes", Note.class);
+    public void addNote(Note note) {
+        Document doc = new Document();
+        doc.put("title", note.getTitle());
+        doc.put("content", note.getContent());
+        doc.put("exported", note.isExported());
+        noteCollection.insertOne(note);
     }
 
     public List<Note> getAllNotes() {
         List<Note> notes = new ArrayList<>();
-        noteCollection.find().forEach(notes::add);
+        noteCollection.find().iterator().forEachRemaining(notes::add);
         return notes;
     }
 
-    public void addNote(Note note) {
-        noteCollection.insertOne(note);
+    public void deleteNoteById(ObjectId id) {
+        noteCollection.deleteOne(eq("_id", id));
     }
 
     public void updateNote(Note note) {
         noteCollection.replaceOne(eq("_id", note.getId()), note);
     }
 
-    public void deleteNoteById(org.bson.types.ObjectId id) {
-        noteCollection.deleteOne(eq("_id", id));
-    }
-
-    public void close() {
-        client.close();
+    public void markNoteAsExported(ObjectId id) {
+        Note note = noteCollection.find(eq("_id", id)).first();
+        if (note != null) {
+            note.setExported(true);
+            updateNote(note);
+        }
     }
 }
