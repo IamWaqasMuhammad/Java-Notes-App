@@ -14,9 +14,30 @@ A sleek and user-friendly JavaFX desktop application to **create**, **update**, 
 
 ---
 
+## 🛠️ Technologies Used
+
+<p align="left">
+  <img alt="Java" src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white" height="28"/>
+  <img alt="JavaFX" src="https://img.shields.io/badge/JavaFX-0078D7?style=for-the-badge&logo=javafx&logoColor=white" height="28"/>
+  <img alt="MongoDB" src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" height="28"/>
+  <img alt="iText" src="https://img.shields.io/badge/iText-FF6F00?style=for-the-badge&logo=adobe&logoColor=white" height="28"/>
+</p>
+
+- ☕ **Java 17**  
+- 🎨 **JavaFX 19**  
+- 🍃 **MongoDB** for NoSQL storage  
+- 📄 **iText PDF** library for PDF generation  
+
+---
+
 ## 🚀 Quick Installation
 
 1. **Clone this repo:**
 
    ```bash
    git clone https://github.com/IamWaqasMuhammad/Java-Notes-App.git
+
+## 🔗 Connect with Me
+
+I'd love to connect with you on LinkedIn! Feel free to reach out:  
+[![LinkedIn]((https://www.linkedin.com/in/waqas-muhammad-0ba609290/).svg?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/waqas-muhammad-0ba609290/)
