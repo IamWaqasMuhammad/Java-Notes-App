@@ -41,8 +41,8 @@ public class Note {
     public String toString() {
         return "Note{" +
                 "id=" + (id != null ? id.toHexString() : "null") +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
+                ", title='" + title + "\n" +
+                ", content='" + content + "\n" +
                 ", exported=" + exported +
                 '}';
     }
