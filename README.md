@@ -31,7 +31,7 @@ A sleek and user-friendly JavaFX desktop application to **create**, **update**, 
 - 🍃 **MongoDB** for NoSQL storage  
 - 📄 **iText PDF** library for PDF generation  
 - 🔧 **GitHub** for version control  
-- 💡 **IntelliJ IDEA** as the IDE.  
+- 💡 **IntelliJ IDEA** as the IDE
 
 
 ---
