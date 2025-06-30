@@ -8,9 +8,7 @@ public class Note {
     private String content;
     private boolean exported;
 
-    public Note() {
-        // Required for MongoDB codec/POJO
-    }
+    public Note() {}
 
     public Note(String title, String content) {
         this.title = title;
