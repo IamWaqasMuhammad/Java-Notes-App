@@ -10,9 +10,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         SplashScreen splash = new SplashScreen();
-        splash.show(primaryStage);  // ✅ Fix: use .show() instead of .start()
+        splash.show(primaryStage);
 
-        // Delay for 2 seconds, then show MainUI
         Task<Void> sleeper = new Task<>() {
             @Override
             protected Void call() throws Exception {
@@ -22,11 +21,10 @@ public class Main extends Application {
         };
 
 
-
         sleeper.setOnSucceeded(e -> {
             Platform.runLater(() -> {
                 MainUI mainUI = new MainUI();
-                mainUI.show(primaryStage);  // ✅ This will now work after splash
+                mainUI.show(primaryStage);
             });
         });
 

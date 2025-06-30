@@ -20,7 +20,6 @@ public class MainUI {
         // AppBar
         Label title = new Label("Notes App");
         title.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
-
         HBox appBar = new HBox(title);
         appBar.setAlignment(Pos.CENTER_LEFT);
         appBar.setPadding(new Insets(15));
@@ -38,12 +37,14 @@ public class MainUI {
         StackPane.setAlignment(fab, Pos.BOTTOM_RIGHT);
         StackPane.setMargin(fab, new Insets(0, 20, 20, 0));
 
-        // Layout
+        // Main layout
         VBox layout = new VBox(appBar, notesContainer);
         StackPane root = new StackPane(layout, fab);
+        root.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
 
         refreshNotes();
 
+        primaryStage.setTitle("Notes App");
         primaryStage.setScene(new Scene(root, 400, 600));
         primaryStage.show();
     }
@@ -57,41 +58,49 @@ public class MainUI {
     }
 
     private HBox createNoteCard(Note note) {
-        // Title label
         Label titleLabel = new Label(note.getTitle());
         titleLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 16px;");
         titleLabel.setWrapText(true);
 
-        // Content label
         Label contentLabel = new Label(note.getContent());
         contentLabel.setWrapText(true);
 
-        // VBox for title and content vertically stacked
         VBox textContent = new VBox(5, titleLabel, contentLabel);
-        textContent.setAlignment(Pos.TOP_LEFT);
         textContent.setMaxWidth(280);
 
-        // Status label for exported notes
         Label statusLabel = new Label(note.isExported() ? "Exported" : "");
         statusLabel.setStyle("-fx-text-fill: green; -fx-font-style: italic;");
         statusLabel.setMinWidth(60);
         statusLabel.setAlignment(Pos.CENTER);
 
-        // Context menu items
         MenuItem editItem = new MenuItem("Edit");
         MenuItem deleteItem = new MenuItem("Delete");
         MenuItem exportItem = new MenuItem("Export to PDF");
         ContextMenu menu = new ContextMenu(editItem, deleteItem, exportItem);
 
         Button menuButton = new Button("⋮");
-        menuButton.setStyle("-fx-background-color: transparent; -fx-font-size: 16px;");
+        menuButton.setStyle(
+                "-fx-background-color: transparent; " +
+                        "-fx-font-size: 18px; " +
+                        "-fx-padding: 0 5 0 5; " +
+                        "-fx-min-width: 24px; " +
+                        "-fx-min-height: 24px; " +
+                        "-fx-cursor: hand;"
+        );
         menuButton.setOnAction(e -> menu.show(menuButton, Side.BOTTOM, 0, 0));
 
-        editItem.setOnAction(e -> showUpdateNoteDialog(note));
+        // Fix: Hide menu after clicking an option
+        editItem.setOnAction(e -> {
+            menu.hide();
+            showUpdateNoteDialog(note);
+        });
+
         deleteItem.setOnAction(e -> {
+            menu.hide();
             mongoService.deleteNoteById(note.getId());
             refreshNotes();
         });
+
         exportItem.setOnAction(e -> {
             menu.hide();
             boolean success = PDFExporter.exportNoteAsPDF(note);
@@ -101,10 +110,10 @@ public class MainUI {
             }
         });
 
-        // Card container
-        HBox card = new HBox(10, textContent, statusLabel, menuButton);
-        HBox.setHgrow(textContent, Priority.ALWAYS);
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
 
+        HBox card = new HBox(10, textContent, statusLabel, spacer, menuButton);
         card.setAlignment(Pos.CENTER_LEFT);
         card.setPadding(new Insets(10));
         card.setStyle("-fx-background-color: white; -fx-border-radius: 10; -fx-background-radius: 10; "
@@ -116,17 +125,30 @@ public class MainUI {
     private void showAddNoteDialog() {
         Dialog<Note> dialog = new Dialog<>();
         dialog.setTitle("Add Note");
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStyleClass().add("dialog-pane");
+
+        Label header = new Label("Add New Note");
+        header.getStyleClass().add("dialog-header");
 
         TextField titleField = new TextField();
-        TextArea contentArea = new TextArea();
+        titleField.setPromptText("Enter title");
+        titleField.getStyleClass().add("text-field");
 
-        VBox content = new VBox(10, new Label("Title:"), titleField, new Label("Content:"), contentArea);
-        dialog.getDialogPane().setContent(content);
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        TextArea contentArea = new TextArea();
+        contentArea.setPromptText("Write your note here...");
+        contentArea.setWrapText(true);
+        contentArea.getStyleClass().add("text-area");
+
+        VBox content = new VBox(12, header, titleField, contentArea);
+        content.setPadding(new Insets(10));
+        dialogPane.setContent(content);
+
+        dialogPane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         dialog.setResultConverter(btn -> {
             if (btn == ButtonType.OK) {
-                return new Note(titleField.getText(), contentArea.getText());
+                return new Note(titleField.getText().trim(), contentArea.getText().trim());
             }
             return null;
         });
@@ -140,18 +162,29 @@ public class MainUI {
     private void showUpdateNoteDialog(Note note) {
         Dialog<Note> dialog = new Dialog<>();
         dialog.setTitle("Update Note");
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getStyleClass().add("dialog-pane");
+
+        Label header = new Label("Update Note");
+        header.getStyleClass().add("dialog-header");
 
         TextField titleField = new TextField(note.getTitle());
-        TextArea contentArea = new TextArea(note.getContent());
+        titleField.getStyleClass().add("text-field");
 
-        VBox content = new VBox(10, new Label("Title:"), titleField, new Label("Content:"), contentArea);
-        dialog.getDialogPane().setContent(content);
-        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        TextArea contentArea = new TextArea(note.getContent());
+        contentArea.setWrapText(true);
+        contentArea.getStyleClass().add("text-area");
+
+        VBox content = new VBox(12, header, titleField, contentArea);
+        content.setPadding(new Insets(10));
+        dialogPane.setContent(content);
+
+        dialogPane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         dialog.setResultConverter(btn -> {
             if (btn == ButtonType.OK) {
-                note.setTitle(titleField.getText());
-                note.setContent(contentArea.getText());
+                note.setTitle(titleField.getText().trim());
+                note.setContent(contentArea.getText().trim());
                 return note;
             }
             return null;

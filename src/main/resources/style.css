@@ -1,172 +1,117 @@
-/* Root and general background */
-.root {
-    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    -fx-background-color: linear-gradient(to bottom right, #e0f7fa, #80deea);
-    -fx-padding: 20px;
+/* Background */
+.main-bg {
+    -fx-background-color: linear-gradient(to bottom right, #f2f3f8, #e1e2ef);
 }
 
-/* AppBar style */
-#app-bar {
-    -fx-background-color: #0288d1;
-    -fx-padding: 15px 20px;
+/* AppBar */
+.app-bar {
+    -fx-background-color: #6200EE;
+    -fx-padding: 15px;
+}
+
+.app-title {
+    -fx-font-size: 24px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Notes Container */
+.notes-container {
+    -fx-padding: 10;
+}
+
+/* Note Card */
+.note-card {
+    -fx-background-color: white;
+    -fx-border-radius: 16px;
+    -fx-background-radius: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0.3, 0, 3);
+    -fx-padding: 12px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease-in-out;
     -fx-alignment: center-left;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 5, 0, 0, 2);
+}
+.note-card:hover {
+    -fx-scale-x: 1.01;
+    -fx-scale-y: 1.01;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.4, 0, 4);
 }
 
-#app-bar > Label {
+/* Note Title and Content */
+.note-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+.note-content {
+    -fx-font-size: 13px;
+    -fx-text-fill: #333;
+}
+
+/* Exported Label */
+.exported-label {
+    -fx-text-fill: green;
+    -fx-font-style: italic;
+    -fx-font-size: 12px;
+}
+
+/* Menu Button */
+.menu-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 28px;
+    -fx-text-fill: #888;
+    -fx-cursor: hand;
+    -fx-padding: 0 10px;
+    -fx-min-width: 36px;
+    -fx-min-height: 36px;
+    -fx-alignment: center;
+}
+.menu-button:hover {
+    -fx-text-fill: #6200EE;
+}
+
+
+/* FAB */
+.fab {
+    -fx-background-radius: 50%;
+    -fx-background-color: #6200EE;
     -fx-text-fill: white;
     -fx-font-size: 24px;
     -fx-font-weight: bold;
-    -fx-letter-spacing: 1.2px;
-}
-
-/* Floating Action Button (FAB) */
-#fab {
-    -fx-background-radius: 50%;
-    -fx-background-color: #03a9f4;
-    -fx-text-fill: white;
-    -fx-font-size: 28px;
-    -fx-min-width: 56px;
-    -fx-min-height: 56px;
     -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.35), 8, 0, 0, 3);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0.5, 0, 3);
+    -fx-pref-width: 60px;
+    -fx-pref-height: 60px;
     -fx-alignment: center;
-    -fx-padding: 0;
-    -fx-transition: background-color 0.3s ease;
+    -fx-transition: all 0.2s ease-in-out;
+}
+.fab:hover {
+    -fx-background-color: #4a00d2;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
-#fab:hover {
-    -fx-background-color: #0288d1;
-}
-
-/* Notes List Container */
-#notes-list {
-    -fx-background-color: white;
-    -fx-background-radius: 12px;
-    -fx-padding: 10px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0, 0, 4);
-    -fx-border-color: #b3e5fc;
-    -fx-border-width: 1px;
-}
-
-/* Individual Note Item */
-.note-item {
-    -fx-background-color: #f9f9f9;
-    -fx-padding: 12px 15px;
-    -fx-border-radius: 8px;
-    -fx-background-radius: 8px;
-    -fx-margin-bottom: 8px;
-    -fx-cursor: default;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 2, 0, 0, 1);
-    -fx-transition: background-color 0.2s ease;
-}
-
-.note-item:hover {
-    -fx-background-color: #e1f5fe;
-}
-
-/* Note Title */
-.note-title {
-    -fx-font-size: 18px;
-    -fx-font-weight: 600;
-    -fx-text-fill: #0277bd;
-    -fx-wrap-text: true;
-}
-
-/* Note Content Preview */
-.note-content {
-    -fx-font-size: 14px;
-    -fx-text-fill: #555;
-    -fx-wrap-text: true;
-    -fx-padding: 6px 0 0 0;
-}
-
-/* Context Menu Button (3 dots) */
-#menu-button {
-    -fx-background-color: transparent;
-    -fx-font-size: 20px;
-    -fx-text-fill: #0277bd;
-    -fx-cursor: hand;
-    -fx-padding: 4 8 4 8;
-    -fx-alignment: center;
-    -fx-transition: color 0.3s ease;
-}
-
-#menu-button:hover {
-    -fx-text-fill: #01579b;
-}
-
-/* Dialogs - solid background and rounded corners */
+/* Dialog Styling */
 .dialog-pane {
-    -fx-background-color: #ffffff;
-    -fx-background-radius: 12px;
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 16px;
+    -fx-border-radius: 16px;
     -fx-padding: 20px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 5);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 12, 0.4, 0, 4);
+}
+
+.dialog-pane > .content.label {
     -fx-font-size: 15px;
-    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -fx-text-fill: #333;
 }
 
-/* TextField and TextArea inside dialogs */
-.text-field, .text-area {
-    -fx-background-radius: 6px;
-    -fx-border-radius: 6px;
-    -fx-border-color: #81d4fa;
-    -fx-padding: 8px 12px;
-    -fx-font-size: 14px;
-    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    -fx-focus-color: #0288d1;
-    -fx-faint-focus-color: #bbdefb;
-    -fx-background-color: #fefefe;
-}
-
-/* Buttons in dialogs */
-.button {
-    -fx-background-radius: 8px;
-    -fx-background-color: #0288d1;
+.dialog-pane > .button-bar > .button {
+    -fx-background-color: #6200EE;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-padding: 8 20 8 20;
-    -fx-cursor: hand;
-    -fx-font-size: 14px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
-    -fx-transition: background-color 0.3s ease;
-}
-
-.button:hover {
-    -fx-background-color: #0277bd;
-}
-
-/* Scroll Pane styling */
-.scroll-pane {
-    -fx-background: transparent;
-    -fx-padding: 5;
-}
-
-.scroll-pane .viewport {
-    -fx-background-color: transparent;
-}
-
-/* ScrollBar styling */
-.scroll-bar:vertical {
-    -fx-background-color: transparent;
-}
-
-.scroll-bar:vertical .thumb {
-    -fx-background-color: #0288d1;
-    -fx-background-insets: 2;
+    -fx-padding: 8px 16px;
     -fx-background-radius: 8px;
 }
-
-.scroll-bar:vertical .thumb:hover {
-    -fx-background-color: #01579b;
-}
-
-/* Tooltip styling */
-.tooltip {
-    -fx-background-color: #0288d1;
-    -fx-text-fill: white;
-    -fx-font-size: 13px;
-    -fx-padding: 6 10 6 10;
-    -fx-background-radius: 6px;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);
+.dialog-pane > .button-bar > .button:hover {
+    -fx-background-color: #4a00d2;
 }
