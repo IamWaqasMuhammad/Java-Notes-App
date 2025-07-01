@@ -8,7 +8,6 @@ import org.example.model.Note;
 import javax.swing.*;
 import java.io.FileOutputStream;
 
-/// PDF Exporter CLASS
 public class PDFExporter {
     public static boolean exportNoteAsPDF(Note note) {
         JFileChooser fileChooser = new JFileChooser();
