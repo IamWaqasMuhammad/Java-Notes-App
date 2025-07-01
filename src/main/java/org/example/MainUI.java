@@ -78,6 +78,7 @@ public class MainUI {
         MenuItem exportItem = new MenuItem("Export to PDF");
         ContextMenu menu = new ContextMenu(editItem, deleteItem, exportItem);
 
+        /// --------
         Button menuButton = new Button("⋮");
         menuButton.setStyle(
                 "-fx-background-color: transparent; " +
@@ -89,7 +90,7 @@ public class MainUI {
         );
         menuButton.setOnAction(e -> menu.show(menuButton, Side.BOTTOM, 0, 0));
 
-        // Fix: Hide menu after clicking an option
+        /// Fix: Hide menu after clicking an option
         editItem.setOnAction(e -> {
             menu.hide();
             showUpdateNoteDialog(note);
