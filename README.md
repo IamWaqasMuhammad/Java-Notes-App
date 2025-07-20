@@ -1,4 +1,6 @@
-# 📓📝 Java Notes App
+# 📓📝 Java Notes App 
+
+..  
 
 A sleek and user-friendly JavaFX desktop application to **create**, **update**, **delete**, and **export notes as PDFs** with **MongoDB** for persistent storage. 🖥️☕🗃️📄
 
